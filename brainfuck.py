@@ -7,6 +7,7 @@ class BrainFuck:
         YOU CAN WIRTE BRAINFUCK CODE AND GIVE IT TO THIS INTERPRETER
         IT WILL RUN IT FOR YOU!!
         brainfuck(code)
+        # it is great
     """
     
     def __init__(self, bf):
