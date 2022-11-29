@@ -1,16 +1,17 @@
-# a simple brainfuck interpreter written in python
-
 class BrainFuck:
     
     """
         THIS CLASS IMPLEMENTS ALL THE FUNCTIONALITY OF A BRAINFUCK INTERPRETER
         YOU CAN WIRTE BRAINFUCK CODE AND GIVE IT TO THIS INTERPRETER
         IT WILL RUN IT FOR YOU!!
-        brainfuck(code)
-        # it is great
+        
+        USING: 
+            interpreter = BrainFuck(code)
+            OR
+            BrainFuck(code).evaluate()
     """
     
-    def __init__(self, bf):
+    def __init__(self, bf=None):
         # contains all the cells in list
         self.vars = [0]
         # contains offset of current cell
@@ -115,32 +116,32 @@ class BrainFuck:
     
     # this method executes current character
     # at the offset pointer
-    def evaluate(self):
+    def evaluate(self, code=None):
+        
+        if code != None:
+            self.bf = code
+        
+        if self.bf == None:
+            print('No BrainFuck Code provided')
+        else:
         # keep executing until end
-        while self.code_offset < len(self.bf):
-            print(self.vars)
-            # exec func based on operator
-            if self.bf[self.code_offset] == '+':
-                self.add_symbol()
-            elif self.bf[self.code_offset] == '-':
-                self.sub_symbol()
-            elif self.bf[self.code_offset] == '>':
-                self.move_forward()
-            elif self.bf[self.code_offset] == '<':
-                self.move_backward()
-            elif self.bf[self.code_offset] == '[':
-                self.current_0_forward()
-            elif self.bf[self.code_offset] == ']':
-                self.current_0_backward()
-            elif self.bf[self.code_offset] == '.':
-                self.output()
-            elif self.bf[self.code_offset] == ',':
-                self.input_char()
+            while self.code_offset < len(self.bf):
+                # exec func based on operator
+                if self.bf[self.code_offset] == '+':
+                    self.add_symbol()
+                elif self.bf[self.code_offset] == '-':
+                    self.sub_symbol()
+                elif self.bf[self.code_offset] == '>':
+                    self.move_forward()
+                elif self.bf[self.code_offset] == '<':
+                    self.move_backward()
+                elif self.bf[self.code_offset] == '[':
+                    self.current_0_forward()
+                elif self.bf[self.code_offset] == ']':
+                    self.current_0_backward()
+                elif self.bf[self.code_offset] == '.':
+                    self.output()
+                elif self.bf[self.code_offset] == ',':
+                    self.input_char()
 
-            self.inc_code_offset()
-
-
-# trying above class out
-Compiler = BrainFuck('++[>++[>++[>++<-]<-]<-]>>+++.')
-
-Compiler.evaluate()
+                self.inc_code_offset()
